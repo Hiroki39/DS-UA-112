@@ -15,7 +15,8 @@ def calc_partial_correlation(independent, dependent, control):
 
     betas = regr1.coef_  # m
     y_int = regr1.intercept_  # b
-    y_hat = np.dot(betas, control) + y_int  # multiply betas vector with data vector
+    # multiply betas vector with data vector
+    y_hat = np.dot(betas, control) + y_int
     residuals_1 = dependent - y_hat
 
     regr2 = linear_model.LinearRegression()
@@ -24,7 +25,8 @@ def calc_partial_correlation(independent, dependent, control):
 
     betas = regr2.coef_  # m
     y_int = regr2.intercept_  # b
-    y_hat = np.dot(betas, control) + y_int  # multiply betas vector with data vector
+    # multiply betas vector with data vector
+    y_hat = np.dot(betas, control) + y_int
     residuals_2 = independent - y_hat
 
     return np.corrcoef(residuals_1, residuals_2)[0, 1]
@@ -35,7 +37,8 @@ data = np.genfromtxt('kepler.txt', delimiter='   ')  # load file as data
 r_caste_iq = np.corrcoef(data[:, 0], data[:, 1])[0, 1]
 r_caste_iq
 
-r_caste_iq_controllbrain = calc_partial_correlation(data[:, 0], data[:, 1], [data[:, 2]])
+r_caste_iq_controllbrain = calc_partial_correlation(
+    data[:, 0], data[:, 1], [data[:, 2]])
 r_caste_iq_controllbrain
 
 simple_linear_regress_func(np.transpose([data[:, 2], data[:, 1]]))
@@ -43,13 +46,16 @@ simple_linear_regress_func(np.transpose([data[:, 2], data[:, 1]]))
 r_income_caste = np.corrcoef(data[:, 4], data[:, 0])[0, 1]
 r_income_caste
 
-r_income_caste_controllIQ = calc_partial_correlation(data[:, 4], data[:, 0], [data[:, 1]])
+r_income_caste_controllIQ = calc_partial_correlation(
+    data[:, 4], data[:, 0], [data[:, 1]])
 r_income_caste_controllIQ
 
-r_income_caste_controllwork = calc_partial_correlation(data[:, 4], data[:, 0], [data[:, 3]])
+r_income_caste_controllwork = calc_partial_correlation(
+    data[:, 4], data[:, 0], [data[:, 3]])
 r_income_caste_controllwork
 
-r_income_caste_controllIQ_and_work = calc_partial_correlation(data[:, 0], data[:, 4], [data[:, 1], data[:, 3]])
+r_income_caste_controllIQ_and_work = calc_partial_correlation(
+    data[:, 0], data[:, 4], [data[:, 1], data[:, 3]])
 r_income_caste_controllIQ_and_work
 
 simple_linear_regress_func(np.transpose([data[:, 1], data[:, 4]]))

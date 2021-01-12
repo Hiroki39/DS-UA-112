@@ -1,9 +1,5 @@
 import numpy as np
-from sklearn import linear_model
 from scipy import stats
-import sys
-sys.path.append(sys.path[0] + '/../../Recitation/code/session5')
-from simple_linear_regress_func import simple_linear_regress_func
 
 # load file as data
 data1 = np.genfromtxt('Sadex1.txt', delimiter='\t')
